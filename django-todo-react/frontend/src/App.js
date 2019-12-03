@@ -20,7 +20,7 @@ import React, { Component } from "react";
       }
       refreshList = () => {
         axios
-          .get("http://localhost:8000/api/todos/")
+          .get("https://8000-d71fcd19-2a51-4f8a-b55f-dd89b6f92617.ws-us02.gitpod.io/api/todos/")
           .then(res => this.setState({ todoList: res.data }))
           .catch(err => console.log(err));
       };
@@ -91,17 +91,17 @@ import React, { Component } from "react";
         this.toggle();
         if (item.id) {
           axios
-            .put(`http://localhost:8000/api/todos/${item.id}/`, item)
+            .put(`https://8000-d71fcd19-2a51-4f8a-b55f-dd89b6f92617.ws-us02.gitpod.io/api/todos/${item.id}/`, item)
             .then(res => this.refreshList());
           return;
         }
         axios
-          .post("http://localhost:8000/api/todos/", item)
+          .post("https://8000-d71fcd19-2a51-4f8a-b55f-dd89b6f92617.ws-us02.gitpod.io/api/todos/", item)
           .then(res => this.refreshList());
       };
       handleDelete = item => {
         axios
-          .delete(`http://localhost:8000/api/todos/${item.id}`)
+          .delete(`https://8000-d71fcd19-2a51-4f8a-b55f-dd89b6f92617.ws-us02.gitpod.io/api/todos/${item.id}`)
           .then(res => this.refreshList());
       };
       createItem = () => {

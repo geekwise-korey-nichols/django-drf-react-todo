@@ -124,5 +124,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST = (
-    "https://localhost:3000",
+    "https://3000-d71fcd19-2a51-4f8a-b55f-dd89b6f92617.ws-us02.gitpod.io",
 )
