@@ -25,5 +25,25 @@ class Customer(models.Model):
 
 # Account model
 class Account(models.Model):
-    
+    customer = models.OneToOneField(
+        Customer,
+        on_delete = models.CASCADE
+    )
+    account_id = str(uuid.uuid4())
 # Product model
+class Product(models.Model):
+    option_types = (
+        ('checking', 'CHECKING'),
+        ('savings', 'SAVINGS'),
+        ('credit', 'CREDIT'),
+        ('debit', 'DEBIT')
+    )
+    account = models.ForeignKey(
+        Account,
+        on_delete = models.CASCADE
+    )
+    product_types = models.CharField(
+        max_length=8,
+        choices = option_types,
+        default = option_types[1]
+    )
