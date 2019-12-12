@@ -38,6 +38,7 @@ class Product(models.Model):
         ('credit', 'CREDIT'),
         ('debit', 'DEBIT')
     )
+    amount = models.FloatField(max_length=9)
     account = models.ForeignKey(
         Account,
         on_delete = models.CASCADE
