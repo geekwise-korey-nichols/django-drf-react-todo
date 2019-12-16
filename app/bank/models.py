@@ -30,6 +30,10 @@ class Account(models.Model):
         on_delete = models.CASCADE
     )
     account_id = str(uuid.uuid4())
+
+    def __str__(self):
+        return f"{self.customer} - {self.account_id}"
+
 # Product model
 class Product(models.Model):
     option_types = (
@@ -43,8 +47,11 @@ class Product(models.Model):
         Account,
         on_delete = models.CASCADE
     )
-    product_types = models.CharField(
+    product_type = models.CharField(
         max_length=8,
         choices = option_types,
         default = option_types[1]
     )
+
+    def __str__(self):
+        return f"{self.account} - {self.product_type} - {self.amount}"

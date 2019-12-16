@@ -28,6 +28,7 @@ class Product_Serializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Product
         fields = [
+            'account',
             'amount',
             'product_type'
         ]
