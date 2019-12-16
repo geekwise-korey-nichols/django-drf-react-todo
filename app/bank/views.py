@@ -13,3 +13,7 @@ class Customer_Viewset(viewsets.ModelViewSet):
 class Account_Viewset(viewsets.ModelViewSet):
     queryset = Account.objects.all()
     serializer_class = Account_Serializers
+
+class Product_Viewset(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = Product_Serializer
