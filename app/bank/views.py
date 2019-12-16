@@ -8,4 +8,8 @@ class Branch_Viewset(viewsets.ModelViewSet):
 
 class Customer_Viewset(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
-    serializer_class = Branch_Serializer
+    serializer_class = Customer_Serializer
+
+class Account_Viewset(viewsets.ModelViewSet):
+    queryset = Account.objects.all()
+    serializer_class = Account_Serializers
