@@ -17,7 +17,7 @@ class App extends Component{
   }
   componentDidMount() {
     axios
-          .get("https://bank-backend-korey.herokuapp.com/branch/")
+          .get("http://127.0.0.1:8000/branch/")
           .then(res => console.log(res))
           .catch(err => console.log(err));
   }
