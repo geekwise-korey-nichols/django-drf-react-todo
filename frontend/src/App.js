@@ -8,25 +8,40 @@ class App extends Component{
     this.state = {
       viewCompleted: false,
       activeItem: {
-        title: "",
-        description: "",
-        completed: false
+        location: "",
+        location_name: ""
       },
-      todoList: []
+      branches: []
     };
   }
   componentDidMount() {
     axios
-          .get("http://127.0.0.1:8000/branch/")
-          .then(res => console.log(res))
+          .get("https://bank-backend-korey.herokuapp.com/branch/")
+          .then(res => this.setState({branches: res.data }))
           .catch(err => console.log(err));
   }
+  displayCompleted = status => {
+    if (status) {
+      return this.setState({ viewCompleted: true });
+    }
+    return this.setState({ viewCompleted: false });
+  };
 
+  renderBranches() {
+    const { viewCompleted } = this.state;
+    const newItems = this.state.branches.results
+    console.log(newItems);
+    return (
+      <li>
+        {newItems[0].location_name} - {newItems[0].location}
+      </li>
+    )
+  }
 
-render() {
-  return (
-    <h1>It works</h1>
-  )
-}
+  render() {
+    return (
+      <ul>{this.renderBranches()}</ul>
+    )
+  }
 }
 export default App;
