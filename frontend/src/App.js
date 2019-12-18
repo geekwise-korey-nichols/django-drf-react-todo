@@ -31,53 +31,80 @@ class App extends Component{
           .catch(err => console.log(err));
   }
 
+  onSave(item) {
+    axios
+          .post("http://localhost:8000/branch/", item)
+          .then(res => this.componentDidMount())
+  }
+
+  handleDelete(item) {
+    axios
+          .delete(`http://localhost:8000/branch/${item.id}`)
+          .then(res => this.componentDidMount())
+  }
+
   renderBranches() {
-    console.log(this.state)
+    //console.log(this.state)
     let newItems = []
     newItems = this.state.branches
-    console.log(newItems);
+    //console.log(newItems);
     return newItems.map(item => (
       <li key={item.id}>
         {item.location_name}
+        <button
+                onClick={() => this.handleDelete(item)}
+                className="btn btn-danger"
+              >
+                Delete{" "}
+              </button>
       </li>
     ))
   }
 
+  
+  onSave(item) {
+    axios
+          .post("http://localhost:8000/branch/", item)
+          .then(res => this.componentDidMount())
+  }
+
+  handleChange = e => {
+    let { name, value } = e.target;
+    if (e.target.type === "checkbox") {
+        value = e.target.checked;
+    }
+    const activeItem = { ...this.state.activeItem, [name]: value};
+    this.setState({ activeItem });
+  };
   createForm() {
     return (
-      <Form>
+      <div>
+        <Form>
                 <FormGroup>
-                  <Label for="title">Title</Label>
+                  <Label for="location_name">Location Name</Label>
                   <Input
                     type="text"
-                    name="title"
-                    value={this.state.activeItem.title}
+                    name="location_name"
+                    value={this.state.activeItem.location_name}
                     onChange={this.handleChange}
-                    placeholder="Enter Todo Title"
+                    placeholder="Enter branch name"
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="description">Description</Label>
+                  <Label for="location">Location</Label>
                   <Input
                     type="text"
-                    name="description"
-                    value={this.state.activeItem.description}
+                    name="location"
+                    value={this.state.activeItem.location}
                     onChange={this.handleChange}
-                    placeholder="Enter Todo description"
+                    placeholder="Enter branch location"
                   />
-                </FormGroup>
-                <FormGroup check>
-                  <Label for="completed">
-                    <Input
-                      type="checkbox"
-                      name="completed"
-                      checked={this.state.activeItem.completed}
-                      onChange={this.handleChange}
-                    />
-                    Completed
-                  </Label>
                 </FormGroup>
               </Form>
+        <Button color="success" onClick={() => this.onSave(this.state.activeItem)}>
+          Save
+        </Button>
+      </div>
     )
   }
 
