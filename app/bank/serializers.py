@@ -5,6 +5,7 @@ class Branch_Serializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
         model = Branch
         fields = [
+            'id',
             'location_name',
             'location'
         ]
