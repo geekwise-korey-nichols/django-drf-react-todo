@@ -7,7 +7,8 @@ class Branch_Serializer( serializers.HyperlinkedModelSerializer ):
         fields = [
             'id',
             'location_name',
-            'location'
+            'location',
+            'location_id'
         ]
 
 class Customer_Serializer( serializers.HyperlinkedModelSerializer ):

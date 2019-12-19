@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Input,
-  Label
-} from "reactstrap";
+
+import Modal from "./components/Modal";
 
 class App extends Component{
   constructor(props) {
@@ -31,7 +22,7 @@ class App extends Component{
           .catch(err => console.log(err));
   }
 
-  onSave(item) {
+  handleSubmit(item) {
     axios
           .post("http://localhost:8000/branch/", item)
           .then(res => this.componentDidMount())
@@ -44,20 +35,27 @@ class App extends Component{
   }
 
   renderBranches() {
-    //console.log(this.state)
     let newItems = []
     newItems = this.state.branches
-    //console.log(newItems);
     return newItems.map(item => (
-      <li key={item.id}>
-        {item.location_name}
+      <div>
+        <li key={item.id}>
+          {item.location_name}
+        </li>
         <button
-                onClick={() => this.handleDelete(item)}
-                className="btn btn-danger"
+                onClick={() => this.editItem(item)}
+                className="btn btn-secondary mr-2"
               >
-                Delete{" "}
+                {" "}
+                Edit{" "}
               </button>
-      </li>
+        <button
+        onClick={() => this.handleDelete(item)}
+        className="btn btn-danger"
+      >
+        Delete{" "}
+      </button>
+    </div>
     ))
   }
 
@@ -76,43 +74,48 @@ class App extends Component{
     const activeItem = { ...this.state.activeItem, [name]: value};
     this.setState({ activeItem });
   };
-  createForm() {
-    return (
-      <div>
-        <Form>
-                <FormGroup>
-                  <Label for="location_name">Location Name</Label>
-                  <Input
-                    type="text"
-                    name="location_name"
-                    value={this.state.activeItem.location_name}
-                    onChange={this.handleChange}
-                    placeholder="Enter branch name"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="location">Location</Label>
-                  <Input
-                    type="text"
-                    name="location"
-                    value={this.state.activeItem.location}
-                    onChange={this.handleChange}
-                    placeholder="Enter branch location"
-                  />
-                </FormGroup>
-              </Form>
-        <Button color="success" onClick={() => this.onSave(this.state.activeItem)}>
-          Save
-        </Button>
-      </div>
-    )
-  }
+
+  createItem = () => {
+    const item = { title: "", description: "", completed: false };
+    this.setState({ activeItem: item, modal: !this.state.modal });
+  };
+
+  editItem = item => {
+    this.setState({ activeItem: item, modal: !this.state.modal });
+  };
+
+  toggle = () => {
+    this.setState({ modal: !this.state.modal });
+  };
+
+  handleSubmit = item => {
+    this.toggle();
+        if (item.id) {
+          axios
+            .put(`http://localhost:8000/branch/${item.id}/`, item)
+            .then(res => this.componentDidMount());
+          return;
+        }
+        axios
+          .post("http://localhost:8000/branch/", item)
+          .then(res => this.componentDidMount());
+      };
+  
 
   render() {
     return (
       <div>
         <ul>{this.renderBranches()}</ul>
-        <div>{this.createForm()}</div>
+        <button onClick={this.createItem} className="btn btn-primary">
+                      Add task
+                    </button>
+        {this.state.modal ? (
+              <Modal
+                activeItem={this.state.activeItem}
+                toggle={this.toggle}
+                onSave={this.handleSubmit}
+              />
+            ) : null}
       </div>
     )
   }
