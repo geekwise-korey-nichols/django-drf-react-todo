@@ -1,5 +1,5 @@
 # Bank Project
 
-Bank project using Django and React deployed via Heroku
-[Frontend](https://bank-frontend-korey.herokuapp.com/)
+Bank project using Django and React deployed via Heroku<br>
+[Frontend](https://bank-frontend-korey.herokuapp.com/)<br>
 [Backend](https://bank-backend-korey.herokuapp.com/)
