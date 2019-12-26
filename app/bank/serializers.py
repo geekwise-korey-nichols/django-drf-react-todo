@@ -11,12 +11,14 @@ class Branch_Serializer( serializers.HyperlinkedModelSerializer ):
         ]
 
 class Customer_Serializer( serializers.HyperlinkedModelSerializer ):
+    branch_id = serializers.IntegerField(read_only=True, source="branch.id")
     class Meta:
         model = Customer
         fields = [
             'id',
             'customer_name',
-            'customer_email'
+            'customer_email',
+            'branch_id'
         ]
 
 class Account_Serializers( serializers.HyperlinkedModelSerializer ):
