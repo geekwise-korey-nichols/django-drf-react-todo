@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios'
 
 import Modal from "./components/Modal";
+import Customer from "./components/Customer";
 
 class App extends Component{
   constructor(props) {
@@ -17,20 +18,20 @@ class App extends Component{
   }
   componentDidMount() {
     axios
-          .get("https://bank-backend-korey.herokuapp.com/branch/")
+          .get("http://localhost:8000/branch/")
           .then(res => this.setState({branches: res.data.results }))
           .catch(err => console.log(err));
   }
 
   handleSubmit(item) {
     axios
-          .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+          .post("http://localhost:8000/branch/", item)
           .then(res => this.componentDidMount())
   }
 
   handleDelete(item) {
     axios
-          .delete(`https://bank-backend-korey.herokuapp.com/branch/${item.id}`)
+          .delete(`http://localhost:8000/branch/${item.id}`)
           .then(res => this.componentDidMount())
   }
 
@@ -55,6 +56,9 @@ class App extends Component{
       >
         Delete{" "}
       </button>
+      <ul>
+        <Customer bankId={item.id}></Customer>
+      </ul>
     </div>
     ))
   }
@@ -62,7 +66,7 @@ class App extends Component{
   
   onSave(item) {
     axios
-          .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+          .post("http://localhost:8000/branch/", item)
           .then(res => this.componentDidMount())
   }
 
@@ -92,12 +96,12 @@ class App extends Component{
     this.toggle();
         if (item.id) {
           axios
-            .put(`https://bank-backend-korey.herokuapp.com/branch/${item.id}/`, item)
+            .put(`http://localhost:8000/branch/${item.id}/`, item)
             .then(res => this.componentDidMount());
           return;
         }
         axios
-          .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+          .post("http://localhost:8000/branch/", item)
           .then(res => this.componentDidMount());
       };
   
