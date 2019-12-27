@@ -57,10 +57,6 @@ class App extends Component{
       >
         Delete{" "}
       </button>
-      <ul>
-        <Customer bankId={item.id}></Customer>
-        new customer
-      </ul>
     </div>
     ))
   }
@@ -83,7 +79,7 @@ class App extends Component{
 
   createItem = () => {
     const item = { title: "", description: "", completed: false };
-    this.setState({ activeItem: item, modal: !this.state.modal });
+    this.setState({ activeItem: item, modal: !this.state.modal, createCustomer: !this.state.createCustomer });
   };
 
   editItem = item => {
@@ -122,7 +118,6 @@ class App extends Component{
                 onSave={this.handleSubmit}
               />
             ) : null}
-            <Test></Test>
       </div>
     )
   }
