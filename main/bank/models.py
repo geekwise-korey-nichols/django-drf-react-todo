@@ -4,8 +4,8 @@ import uuid
 
 # Branch model
 class Branch(models.Model):
-    location_name = models.CharField(max_length=30)
-    location = models.CharField(max_length=30)
+    location_name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
     location_id = str(uuid.uuid4())
 
     def __str__(self):
