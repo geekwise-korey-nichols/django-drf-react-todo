@@ -19,20 +19,20 @@ class App extends Component{
   }
   componentDidMount() {
     axios
-          .get("http://localhost:8000/branch/")
+          .get("https://bank-backend-korey.herokuapp.com/branch/")
           .then(res => this.setState({branches: res.data.results }))
           .catch(err => console.log(err));
   }
 
   handleSubmit(item) {
     axios
-          .post("http://localhost:8000/branch/", item)
+          .post("https://bank-backend-korey.herokuapp.com/branch/", item)
           .then(res => this.componentDidMount())
   }
 
   handleDelete(item) {
     axios
-          .delete(`http://localhost:8000/branch/${item.id}`)
+          .delete(`https://bank-backend-korey.herokuapp.com/branch/${item.id}`)
           .then(res => this.componentDidMount())
   }
 
@@ -64,7 +64,7 @@ class App extends Component{
   
   onSave(item) {
     axios
-          .post("http://localhost:8000/branch/", item)
+          .post("https://bank-backend-korey.herokuapp.com/branch/", item)
           .then(res => this.componentDidMount())
   }
 
@@ -94,12 +94,12 @@ class App extends Component{
     this.toggle();
         if (item.id) {
           axios
-            .put(`http://localhost:8000/branch/${item.id}/`, item)
+            .put(`https://bank-backend-korey.herokuapp.com/branch/${item.id}/`, item)
             .then(res => this.componentDidMount());
           return;
         }
         axios
-          .post("http://localhost:8000/branch/", item)
+          .post("https://bank-backend-korey.herokuapp.com/branch/", item)
           .then(res => this.componentDidMount());
       };
   
