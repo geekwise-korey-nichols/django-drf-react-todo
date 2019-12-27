@@ -27,10 +27,10 @@ render() {
     return customers.map(customer => (
         <div>
             {this.props.bankId === customer.branch_id &&
-            <li key={customers.id}>
-            {customer.customer_name}
-        </li>}
-            
+                <li key={customers.id}>
+                    {customer.customer_name}
+                </li>
+            }
         </div>
     ))
 }

@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import Modal from "./components/Modal";
 import Customer from "./components/Customer";
+import Test from "./components/Test";
 
 class App extends Component{
   constructor(props) {
@@ -58,6 +59,7 @@ class App extends Component{
       </button>
       <ul>
         <Customer bankId={item.id}></Customer>
+        new customer
       </ul>
     </div>
     ))
@@ -111,7 +113,7 @@ class App extends Component{
       <div>
         <ul>{this.renderBranches()}</ul>
         <button onClick={this.createItem} className="btn btn-primary">
-                      Add task
+                      New Branch
                     </button>
         {this.state.modal ? (
               <Modal
@@ -120,6 +122,7 @@ class App extends Component{
                 onSave={this.handleSubmit}
               />
             ) : null}
+            <Test></Test>
       </div>
     )
   }
