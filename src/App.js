@@ -13,8 +13,7 @@ class App extends Component{
         location: "",
         location_name: ""
       },
-      branches: [],
-      modal: false
+      branches: []
     };
   }
   componentDidMount() {
@@ -27,6 +26,7 @@ class App extends Component{
   handleSubmit(item) {
     axios
           .post("http://localhost:8000/branch/", item)
+          .catch(err => console.log(err))
           .then(res => this.componentDidMount())
   }
 
@@ -68,6 +68,7 @@ class App extends Component{
   onSave(item) {
     axios
           .post("http://localhost:8000/branch/", item)
+          .catch(err => console.log(err))
           .then(res => this.componentDidMount())
   }
 
@@ -81,7 +82,7 @@ class App extends Component{
   };
 
   createItem = () => {
-    const item = { title: "", description: "", completed: false };
+    const item = { location: "", location_name: ""};
     this.setState({ activeItem: item, modal: !this.state.modal, createCustomer: !this.state.createCustomer });
   };
 
@@ -98,13 +99,16 @@ class App extends Component{
         if (item.id) {
           axios
             .put(`http://localhost:8000/branch/${item.id}/`, item)
+            .catch(err => console.log(err))
             .then(res => this.componentDidMount());
           return;
         }
-        console.log(item)
+        if(item.location !== "" && item.location_name !== ""){
         axios
           .post("http://localhost:8000/branch/", item)
+          .catch(err => console.log(err))
           .then(res => this.componentDidMount());
+        }
       };
   
 
