@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import axios from 'axios';
 import {
     Button,
     Modal,
@@ -21,53 +20,52 @@ export default class CreateCustomer extends Component{
                 customer_name: "",
                 customer_email: "",
                 branch: "",
-            },
-            customers: []
+            }
         }
     };
-    
-componentDidMount() {
-    axios
-        .get("http://localhost:8000/customer/")
-        .then(res => this.setState({customers: res.data.results}))
-        .catch(err => console.log(err));
-}
 
-render() {
-    const { toggle, onSave } = this.props;
-    return(
-        <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}> Todo Item </ModalHeader>
-        <ModalBody>
-        <Form>
-                <FormGroup>
-                  <Label for="location_name">Location Name</Label>
-                  <Input
-                    type="text"
-                    name="location_name"
-                    value={this.state.activeItem.location_name}
-                    onChange={this.handleChange}
-                    placeholder="Enter branch name"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="location">Location</Label>
-                  <Input
-                    type="text"
-                    name="location"
-                    value={this.state.activeItem.location}
-                    onChange={this.handleChange}
-                    placeholder="Enter branch location"
-                  />
-                </FormGroup>
-              </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="success" onClick={() => onSave(this.state.activeItem)}>
-            Save
-          </Button>
-        </ModalFooter>
-      </Modal>
-    )
-}
+    handleChange = e => {
+      let { name, value } = e.target;
+      const activeItem = { ...this.state.activeItem, [name]: value };
+      this.setState({ activeItem });
+    };
+
+  render() {
+      const { toggle, onSave } = this.props;
+      console.log(this.props)
+      return(
+          <Modal isOpen={true} toggle={toggle}>
+          <ModalHeader toggle={toggle}> Customer Info </ModalHeader>
+          <ModalBody>
+          <Form>
+                  <FormGroup>
+                    <Label for="customer_name">Customer Name</Label>
+                    <Input
+                      type="text"
+                      name="customer_name"
+                      value={this.state.activeItem.customer_name}
+                      onChange={this.handleChange}
+                      placeholder="Enter customer name"
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="customer_email">Customer Email</Label>
+                    <Input
+                      type="text"
+                      name="customer_email"
+                      value={this.state.activeItem.customer_email}
+                      onChange={this.handleChange}
+                      placeholder="Enter customer email"
+                    />
+                  </FormGroup>
+                </Form>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="success" onClick={() => onSave()}>
+              Save
+            </Button>
+          </ModalFooter>
+        </Modal>
+      )
+  }
 }
