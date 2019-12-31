@@ -4,7 +4,6 @@ import axios from 'axios'
 
 import Modal from "./components/Modal";
 import Customer from "./components/Customer";
-import DynamicDisplay from './components/DynamicDisplay';
 
 class App extends Component{
   constructor(props) {
@@ -111,7 +110,6 @@ class App extends Component{
 
   render() {
     return (
-      // <DynamicDisplay></DynamicDisplay>
       <div>
         <ul>{this.renderBranches()}</ul>
         <button onClick={this.createItem} className="btn btn-primary">
