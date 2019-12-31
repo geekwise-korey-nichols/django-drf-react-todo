@@ -19,7 +19,7 @@ export default class CreateCustomer extends Component{
             activeItem: {
                 customer_name: "",
                 customer_email: "",
-                branch: "",
+                branch: `http://localhost:8000/branch/${this.props.bankId}/`,
             }
         }
     };
@@ -32,7 +32,6 @@ export default class CreateCustomer extends Component{
 
   render() {
       const { toggle, onSave } = this.props;
-      console.log(this.props)
       return(
           <Modal isOpen={true} toggle={toggle}>
           <ModalHeader toggle={toggle}> Customer Info </ModalHeader>
@@ -61,7 +60,7 @@ export default class CreateCustomer extends Component{
                 </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="success" onClick={() => onSave()}>
+            <Button color="success" onClick={() => onSave(this.state.activeItem)}>
               Save
             </Button>
           </ModalFooter>

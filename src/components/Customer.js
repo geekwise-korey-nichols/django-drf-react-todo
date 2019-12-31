@@ -22,6 +22,13 @@ componentDidMount() {
         .catch(err => console.log(err));
 }
 
+createCustomer = () => {
+    const customer = {customer_name: "", customer_email: ""};
+    this.setState({ activeItem: customer, modal: !this.state.modal});
+  };
+
+
+
 handleDelete(item) {
     axios
           .delete(`http://localhost:8000/customer/${item.id}`)
@@ -38,7 +45,7 @@ renderCustomers() {
                     {customer.customer_name}
                     <button
                         onClick={() => this.handleDelete(customer)}
-                        className="btn btn-danger"
+
                     >
                         Delete{" "}
                     </button>
@@ -52,17 +59,22 @@ toggle = () => {
     this.setState({ modal: !this.state.modal });
   };
 
-  handleSubmit = () => {
+  handleSubmit = item => {
     this.toggle();
-    console.log('love heroku')
-    console.log(`http://localhost:8000/branch/${this.props.bankId}/`)
-      };
+    //console.log(`http://localhost:8000/branch/${this.props.bankId}/`)
+    //console.log(this.item)
+    console.log(item)
+      axios
+        .post("http://localhost:8000/customer/", item)
+        .catch(err => console.log(err))
+        .then(res => this.componentDidMount());
+       };
 
 render() {
     return (
         <div>
             {this.renderCustomers()}
-            <button onClick={this.toggle} className="">
+            <button onClick={this.createCustomer} className="">
                       New Customer
                     </button>
             {this.state.modal ? (
