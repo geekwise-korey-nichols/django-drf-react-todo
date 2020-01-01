@@ -19,7 +19,7 @@ class App extends Component{
   componentDidMount() {
     axios
           .get("https://bank-backend-korey.herokuapp.com/branch/")
-          .then(res => this.setState({branches: res.data.results }))
+          .then(res => this.setState({branches: res.data }))
           .catch(err => console.log(err));
   }
 
