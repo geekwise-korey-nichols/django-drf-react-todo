@@ -4,7 +4,6 @@ import axios from 'axios'
 
 import Modal from "./components/Modal";
 import Customer from "./components/Customer";
-import Test from "./components/Test";
 
 class App extends Component{
   constructor(props) {
@@ -19,14 +18,24 @@ class App extends Component{
   }
   componentDidMount() {
     axios
+<<<<<<< HEAD
           .get("https://bank-backend-korey.herokuapp.com/branch/")
           .then(res => this.setState({branches: res.data.results }))
+=======
+          .get("http://localhost:8000/branch/")
+          .then(res => this.setState({branches: res.data }))
+>>>>>>> staging.frontend
           .catch(err => console.log(err));
   }
 
   handleSubmit(item) {
     axios
+<<<<<<< HEAD
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+=======
+          .post("http://localhost:8000/branch/", item)
+          .catch(err => console.log(err))
+>>>>>>> staging.frontend
           .then(res => this.componentDidMount())
   }
 
@@ -40,8 +49,8 @@ class App extends Component{
     let newItems = []
     newItems = this.state.branches
     return newItems.map(item => (
-      <div>
-        <li key={item.id}>
+      <div key={item.id}>
+        <li>
           {item.location_name}
         </li>
         <button
@@ -57,6 +66,9 @@ class App extends Component{
       >
         Delete{" "}
       </button>
+      <ul>
+        <Customer bankId={item.id}></Customer>
+      </ul>
     </div>
     ))
   }
@@ -64,7 +76,12 @@ class App extends Component{
   
   onSave(item) {
     axios
+<<<<<<< HEAD
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+=======
+          .post("http://localhost:8000/branch/", item)
+          .catch(err => console.log(err))
+>>>>>>> staging.frontend
           .then(res => this.componentDidMount())
   }
 
@@ -78,7 +95,7 @@ class App extends Component{
   };
 
   createItem = () => {
-    const item = { title: "", description: "", completed: false };
+    const item = { location: "", location_name: ""};
     this.setState({ activeItem: item, modal: !this.state.modal, createCustomer: !this.state.createCustomer });
   };
 
@@ -94,13 +111,25 @@ class App extends Component{
     this.toggle();
         if (item.id) {
           axios
+<<<<<<< HEAD
             .put(`https://bank-backend-korey.herokuapp.com/branch/${item.id}/`, item)
+=======
+            .put(`http://localhost:8000/branch/${item.id}/`, item)
+            .catch(err => console.log(err))
+>>>>>>> staging.frontend
             .then(res => this.componentDidMount());
           return;
         }
+        if(item.location !== "" && item.location_name !== ""){
         axios
+<<<<<<< HEAD
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+=======
+          .post("http://localhost:8000/branch/", item)
+          .catch(err => console.log(err))
+>>>>>>> staging.frontend
           .then(res => this.componentDidMount());
+        }
       };
   
 
