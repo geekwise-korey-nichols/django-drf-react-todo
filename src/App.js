@@ -18,24 +18,14 @@ class App extends Component{
   }
   componentDidMount() {
     axios
-<<<<<<< HEAD
           .get("https://bank-backend-korey.herokuapp.com/branch/")
           .then(res => this.setState({branches: res.data.results }))
-=======
-          .get("http://localhost:8000/branch/")
-          .then(res => this.setState({branches: res.data }))
->>>>>>> staging.frontend
           .catch(err => console.log(err));
   }
 
   handleSubmit(item) {
     axios
-<<<<<<< HEAD
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
-=======
-          .post("http://localhost:8000/branch/", item)
-          .catch(err => console.log(err))
->>>>>>> staging.frontend
           .then(res => this.componentDidMount())
   }
 
@@ -76,12 +66,7 @@ class App extends Component{
   
   onSave(item) {
     axios
-<<<<<<< HEAD
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
-=======
-          .post("http://localhost:8000/branch/", item)
-          .catch(err => console.log(err))
->>>>>>> staging.frontend
           .then(res => this.componentDidMount())
   }
 
@@ -111,23 +96,13 @@ class App extends Component{
     this.toggle();
         if (item.id) {
           axios
-<<<<<<< HEAD
             .put(`https://bank-backend-korey.herokuapp.com/branch/${item.id}/`, item)
-=======
-            .put(`http://localhost:8000/branch/${item.id}/`, item)
-            .catch(err => console.log(err))
->>>>>>> staging.frontend
             .then(res => this.componentDidMount());
           return;
         }
         if(item.location !== "" && item.location_name !== ""){
         axios
-<<<<<<< HEAD
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
-=======
-          .post("http://localhost:8000/branch/", item)
-          .catch(err => console.log(err))
->>>>>>> staging.frontend
           .then(res => this.componentDidMount());
         }
       };
