@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
-
 import Modal from "./components/Modal";
-import Customer from "./components/Customer";
 
 class App extends Component{
   constructor(props) {
@@ -13,16 +11,22 @@ class App extends Component{
         location: "",
         location_name: ""
       },
-      branches: []
+      branches: [],
+      url: "https://bank-backend-korey.herokuapp.com"
     };
   }
   componentDidMount() {
     axios
+<<<<<<< HEAD
           .get("https://bank-backend-korey.herokuapp.com/branch/")
+=======
+          .get(`${this.state.url}/branch/`)
+>>>>>>> debug.react
           .then(res => this.setState({branches: res.data }))
           .catch(err => console.log(err));
   }
 
+<<<<<<< HEAD
   handleSubmit(item) {
     axios
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
@@ -33,6 +37,11 @@ class App extends Component{
   handleDelete(item) {
     axios
           .delete(`https://bank-backend-korey.herokuapp.com/branch/${item.id}`)
+=======
+  handleDelete(item) {
+    axios
+          .delete(`${this.state.url}/branch/${item.id}`)
+>>>>>>> debug.react
           .then(res => this.componentDidMount())
   }
 
@@ -42,7 +51,7 @@ class App extends Component{
     return newItems.map(item => (
       <div key={item.id}>
         <li>
-          {item.location_name}
+          Name: {item.location_name} - Location: {item.location}
         </li>
         <button
                 onClick={() => this.editItem(item)}
@@ -61,6 +70,7 @@ class App extends Component{
     ))
   }
 
+<<<<<<< HEAD
   
   onSave(item) {
     axios
@@ -69,6 +79,8 @@ class App extends Component{
           .then(res => this.componentDidMount())
   }
 
+=======
+>>>>>>> debug.react
   handleChange = e => {
     let { name, value } = e.target;
     if (e.target.type === "checkbox") {
@@ -96,14 +108,22 @@ class App extends Component{
     if(item.location !== "" && item.location_name !== ""){
         if (item.id) {
           axios
+<<<<<<< HEAD
             .put(`https://bank-backend-korey.herokuapp.com/branch/${item.id}/`, item)
+=======
+            .put(`${this.state.url}/branch/${item.id}/`, item)
+>>>>>>> debug.react
             .catch(err => console.log(err))
             .then(res => this.componentDidMount());
           return;
         }
         
         axios
+<<<<<<< HEAD
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+=======
+          .post(`${this.state.url}/branch/`, item)
+>>>>>>> debug.react
           .catch(err => console.log(err))
           .then(res => this.componentDidMount());
         }
