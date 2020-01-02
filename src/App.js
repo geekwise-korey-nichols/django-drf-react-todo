@@ -26,6 +26,7 @@ class App extends Component{
   handleSubmit(item) {
     axios
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+          .catch(err => console.log(err))
           .then(res => this.componentDidMount())
   }
 
@@ -56,9 +57,6 @@ class App extends Component{
       >
         Delete{" "}
       </button>
-      {/* <ul>
-        <Customer bankId={item.id}></Customer>
-      </ul> */}
     </div>
     ))
   }
@@ -67,6 +65,7 @@ class App extends Component{
   onSave(item) {
     axios
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+          .catch(err => console.log(err))
           .then(res => this.componentDidMount())
   }
 
@@ -94,15 +93,18 @@ class App extends Component{
 
   handleSubmit = item => {
     this.toggle();
+    if(item.location !== "" && item.location_name !== ""){
         if (item.id) {
           axios
             .put(`https://bank-backend-korey.herokuapp.com/branch/${item.id}/`, item)
+            .catch(err => console.log(err))
             .then(res => this.componentDidMount());
           return;
         }
-        if(item.location !== "" && item.location_name !== ""){
+        
         axios
           .post("https://bank-backend-korey.herokuapp.com/branch/", item)
+          .catch(err => console.log(err))
           .then(res => this.componentDidMount());
         }
       };

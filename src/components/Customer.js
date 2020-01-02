@@ -27,6 +27,10 @@ createCustomer = () => {
     this.setState({ activeItem: customer, modal: !this.state.modal});
   };
 
+editCustomer = customer => {
+    this.setState({ activeItem: customer, modal: !this.state.modal });
+}
+
 
 
 handleDelete(item) {
@@ -44,8 +48,12 @@ renderCustomers() {
                 <li key={customers.id}>
                     {customer.customer_name}
                     <button
+                        onClick={() => this.editCustomer(customer)}
+                    >
+                        Edit{" "}
+                    </button>
+                    <button
                         onClick={() => this.handleDelete(customer)}
-
                     >
                         Delete{" "}
                     </button>
@@ -63,6 +71,12 @@ toggle = () => {
     this.toggle();
 
     console.log(item)
+    if(item.id){
+        axios
+            .post(`http://localhost:8000/customer/${item.id}`, item)
+            .catch(err => console.log(err))
+            .then(this.componentDidMount());
+    }
       axios
         .post("http://localhost:8000/customer/", item)
         .catch(err => console.log(err))
