@@ -56,9 +56,9 @@ class App extends Component{
       >
         Delete{" "}
       </button>
-      <ul>
+      {/* <ul>
         <Customer bankId={item.id}></Customer>
-      </ul>
+      </ul> */}
     </div>
     ))
   }

@@ -61,8 +61,7 @@ toggle = () => {
 
   handleSubmit = item => {
     this.toggle();
-    //console.log(`http://localhost:8000/branch/${this.props.bankId}/`)
-    //console.log(this.item)
+
     console.log(item)
       axios
         .post("http://localhost:8000/customer/", item)
