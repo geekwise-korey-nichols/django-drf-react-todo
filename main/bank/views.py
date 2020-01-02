@@ -3,7 +3,7 @@ from .serializers import Branch_Serializer, Customer_Serializer, Account_Seriali
 from .models import Branch, Customer, Account, Product
 
 class Branch_Viewset(viewsets.ModelViewSet):
-    queryset = Branch.objects.all()
+    queryset = Branch.objects.all().order_by('id')
     serializer_class = Branch_Serializer
 
 class Customer_Viewset(viewsets.ModelViewSet):
