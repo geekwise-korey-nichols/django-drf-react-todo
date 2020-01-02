@@ -96,6 +96,7 @@ class App extends Component{
 
   handleSubmit = item => {
     this.toggle();
+    if(item.location !== "" && item.location_name !== ""){
         if (item.id) {
           axios
             .put(`http://localhost:8000/branch/${item.id}/`, item)
@@ -103,7 +104,7 @@ class App extends Component{
             .then(res => this.componentDidMount());
           return;
         }
-        if(item.location !== "" && item.location_name !== ""){
+        
         axios
           .post("http://localhost:8000/branch/", item)
           .catch(err => console.log(err))
