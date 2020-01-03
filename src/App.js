@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
 import Modal from "./components/Modal";
+import Customer from "./components/Customer";
 
 class App extends Component{
   constructor(props) {
@@ -12,7 +13,8 @@ class App extends Component{
         location_name: ""
       },
       branches: [],
-      url: "https://bank-backend-korey.herokuapp.com"
+      url: "http://localhost:8000"
+      // url: "https://bank-backend-korey.herokuapp.com"
     };
   }
   componentDidMount() {
@@ -49,6 +51,9 @@ class App extends Component{
       >
         Delete{" "}
       </button>
+      <ul>
+        <Customer bankId={item.id}></Customer>
+      </ul>
     </div>
     ))
   }

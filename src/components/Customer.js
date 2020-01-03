@@ -11,23 +11,27 @@ export default class Customer extends Component{
                 customer_name: "",
                 customer_email: ""
             },
-            customers: []
+            customers: [],
+            url: "http://localhost:8000"
+            // url: "https://bank-backend-korey.herokuapp.com"
         }
     };
     
 componentDidMount() {
     axios
-        .get("http://localhost:8000/customer/")
+        .get(`${this.state.url}/customer/`)
         .then(res => this.setState({customers: res.data}))
         .catch(err => console.log(err));
 }
 
 createCustomer = () => {
-    const customer = {customer_name: "", customer_email: ""};
+    const customer = {customer_name: "", customer_email: "", branch: `${this.state.url}/branch/${this.props.bankId}/`};
     this.setState({ activeItem: customer, modal: !this.state.modal});
   };
 
-editCustomer = customer => {
+  // set customer to only have name, email and branch
+editCustomer = target_customer => {
+    const customer = {id: target_customer.id, customer_name: target_customer.customer_name, customer_email: target_customer.customer_email, branch: `${this.state.url}/branch/${this.props.bankId}/`};
     this.setState({ activeItem: customer, modal: !this.state.modal });
 }
 
@@ -35,7 +39,7 @@ editCustomer = customer => {
 
 handleDelete(item) {
     axios
-          .delete(`http://localhost:8000/customer/${item.id}`)
+          .delete(`${this.state.url}/customer/${item.id}`)
           .then(res => this.componentDidMount())
   }
 
@@ -69,17 +73,16 @@ toggle = () => {
 
   handleSubmit = item => {
     this.toggle();
-    //console.log(`http://localhost:8000/branch/${this.props.bankId}/`)
-    //console.log(this.item)
     console.log(item)
     if(item.id){
         axios
-            .post(`http://localhost:8000/customer/${item.id}`, item)
+            .put(`${this.state.url}/customer/${item.id}/`, item)
             .catch(err => console.log(err))
             .then(this.componentDidMount());
+            return;
     }
       axios
-        .post("http://localhost:8000/customer/", item)
+        .post(`${this.state.url}/customer/`, item)
         .catch(err => console.log(err))
         .then(res => this.componentDidMount());
        };

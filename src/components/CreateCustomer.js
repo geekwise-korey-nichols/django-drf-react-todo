@@ -16,11 +16,8 @@ export default class CreateCustomer extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            activeItem: {
-                customer_name: "",
-                customer_email: "",
-                branch: `http://localhost:8000/branch/${this.props.bankId}/`,
-            }
+            testItem: this.props.activeItem,
+            activeItem: this.props.activeItem
         }
     };
 
@@ -31,6 +28,7 @@ export default class CreateCustomer extends Component{
     };
 
   render() {
+      console.log(this.state.testItem)
       const { toggle, onSave } = this.props;
       return(
           <Modal isOpen={true} toggle={toggle}>
