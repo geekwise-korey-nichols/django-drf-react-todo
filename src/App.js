@@ -12,21 +12,19 @@ class App extends Component{
         location: "",
         location_name: ""
       },
-      branches: [],
-      url: "http://localhost:8000"
-      // url: "https://bank-backend-korey.herokuapp.com"
+      branches: []
     };
   }
   componentDidMount() {
     axios
-          .get(`${this.state.url}/branch/`)
+          .get(`/branch/`)
           .then(res => this.setState({branches: res.data }))
           .catch(err => console.log(err));
   }
 
   handleDelete(item) {
     axios
-          .delete(`${this.state.url}/branch/${item.id}`)
+          .delete(`/branch/${item.id}`)
           .then(res => this.componentDidMount())
   }
 
@@ -85,14 +83,14 @@ class App extends Component{
     if(item.location !== "" && item.location_name !== ""){
         if (item.id) {
           axios
-            .put(`${this.state.url}/branch/${item.id}/`, item)
+            .put(`/branch/${item.id}/`, item)
             .catch(err => console.log(err))
             .then(res => this.componentDidMount());
           return;
         }
         
         axios
-          .post(`${this.state.url}/branch/`, item)
+          .post(`/branch/`, item)
           .catch(err => console.log(err))
           .then(res => this.componentDidMount());
         }
