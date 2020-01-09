@@ -1,7 +1,8 @@
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, PermissionSerializer
+from django.contrib.auth.models import User
 
 # Register API
 class RegisterAPI(generics.GenericAPIView):
@@ -26,7 +27,7 @@ class LoginAPI(generics.GenericAPIView):
         user = serializer.validated_data
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
+            "token": AuthToken.objects.create(user)[1],
         })
 
 # Get User API
@@ -38,3 +39,23 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+class PermissionAPI(generics.RetrieveAPIView):
+    serializer_class = PermissionSerializer
+
+    def get(self, request):
+        # permissions = User.objects.get(pk=7).get_all_permissions()
+        # print(User.objects.get(pk=7).user_permissions)
+        # data = {
+        #     'permissions': permissions
+        # }
+        # #serializer = PermissionSerializer(data)
+
+        # return Response(data)
+
+
+        all_permissions = User(is_superuser=True).get_all_permissions()
+        user_permissions = User.objects.get(pk=7).get_all_permissions()
+        
+        data = {p: p in user_permissions for p in all_permissions}
+        return Response(data)
