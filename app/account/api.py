@@ -44,16 +44,22 @@ class PermissionAPI(generics.RetrieveAPIView):
     serializer_class = PermissionSerializer
 
     def get(self, request):
-        # permissions = User.objects.get(pk=7).get_all_permissions()
-        # print(User.objects.get(pk=7).user_permissions)
-        # data = {
-        #     'permissions': permissions
-        # }
-        # #serializer = PermissionSerializer(data)
+        permissions = User.objects.get(pk=7).get_all_permissions()
+        print(User.objects.get(pk=7).user_permissions)
+        data = {
+            'permissions': permissions
+        }
+        serializer = PermissionSerializer(data)
 
-        # return Response(data)
+        return Response(data)
 
 
+
+class AllPermissionsAPI(generics.RetrieveAPIView):
+    serializer_class = PermissionSerializer
+
+    def get(self, request):
+        
         all_permissions = User(is_superuser=True).get_all_permissions()
         user_permissions = User.objects.get(pk=7).get_all_permissions()
         
