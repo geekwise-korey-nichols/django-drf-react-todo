@@ -21,7 +21,8 @@ export default class Register extends Component{
             activeItem: {
                 username: "",
                 email: "",
-                password: ""
+                password: "",
+                groups: [1]
             },
             Groups: []
         }
@@ -53,7 +54,9 @@ export default class Register extends Component{
   }
 
     onSubmit() {
-        console.log(this.state.activeItem)
+        //console.log(parseInt(this.state.activeItem.groups))
+        this.state.activeItem.groups = [parseInt(this.state.activeItem.groups)];
+        console.log(this.state.activeItem.groups)
         axios
             .post("http://localhost:8000/users/api/auth/register", this.state.activeItem)
             .then(res => console.log(res.data))
@@ -99,7 +102,10 @@ render() {
                     />
                   </FormGroup>
                   <FormGroup>
-                  <select>
+                  <select
+                  name="groups"
+                  value={this.state.activeItem.groups}
+                  onChange={this.handleChange}>
                     {this.renderGroupOptions()}
                   </select> 
                   </FormGroup>
