@@ -6,7 +6,11 @@ import {
     Form,
     FormGroup,
     Input,
-    Label
+    Label,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle
   } from 'reactstrap'
 
 
@@ -19,6 +23,7 @@ export default class Register extends Component{
                 email: "",
                 password: ""
             },
+            Groups: []
         }
     };
 
@@ -30,16 +35,31 @@ export default class Register extends Component{
       };
     
     componentDidMount() {
-        
+      this.getGroups();
     }
 
-onSubmit() {
-    console.log(this.state.activeItem)
-    axios
-        .post("http://localhost:8000/users/api/auth/register", this.state.activeItem)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err));
-}
+    getGroups() {
+      axios
+        .get("http://localhost:8000/users/api/auth/groups")
+        .then(res => this.setState({Groups: res.data.Groups}))
+        .catch(err => console.log(err))
+    }
+
+    renderGroupOptions() {
+      console.log(this.state.Groups)
+      return this.state.Groups.map(group => (
+        <option value={`${group.id}`}>{group.name}</option>
+      ))
+  }
+
+    onSubmit() {
+        console.log(this.state.activeItem)
+        axios
+            .post("http://localhost:8000/users/api/auth/register", this.state.activeItem)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
+    }
+
 
 render() {
     return(
@@ -77,6 +97,11 @@ render() {
                       placeholder="Enter password"
                       maxLength="256"
                     />
+                  </FormGroup>
+                  <FormGroup>
+                  <select>
+                    {this.renderGroupOptions()}
+                  </select> 
                   </FormGroup>
                     <Button color="success" onClick={() => this.onSubmit()}>
                         Submit
