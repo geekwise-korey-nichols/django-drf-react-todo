@@ -2,19 +2,21 @@ from rest_framework import serializers
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate
 
-class GroupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Group
-        fields = '__all__'
-
 class PermissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
         fields = '__all__'
 
+class GroupSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Group
+        fields = '__all__'
+
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):   
     user_permissions = PermissionSerializer(many=True)
+    groups = GroupSerializer(many=True)
 
     class Meta:
         model = User
@@ -25,6 +27,11 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create(**validated_data)
         for permission_data in permissions_data:
             Permission.objects.create(user=user, **permission_data)
+
+        group_data = validated_data.pop('groups')
+        user = User.objects.create(**validated_data)
+        for group in group_data:
+            Permission.objects.create(user=user, **group)
         return user
         
 # Register Serializer
@@ -40,8 +47,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             validated_data['username'],
             validated_data['email'],
             validated_data['password'],
-            validated_data['groups']
         )
+        # group = Group.objects.get(id=validated_data['groups'])
+        user.groups.set(validated_data['groups'])
         return user
 # Login Serializer
 class LoginSerializer(serializers.Serializer):
