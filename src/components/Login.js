@@ -27,6 +27,7 @@ export default class Login extends Component{
         const activeItem = { ...this.state.activeItem, [name]: value };
         this.setState({ activeItem });
       };
+      
 componentDidMount() {
     
 }

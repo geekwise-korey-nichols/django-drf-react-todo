@@ -43,6 +43,7 @@ export default class CreateCustomer extends Component{
                       value={this.state.activeItem.customer_name}
                       onChange={this.handleChange}
                       placeholder="Enter customer name"
+                      maxLength="256"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -53,6 +54,7 @@ export default class CreateCustomer extends Component{
                       value={this.state.activeItem.customer_email}
                       onChange={this.handleChange}
                       placeholder="Enter customer email"
+                      maxLength="256"
                     />
                   </FormGroup>
                 </Form>

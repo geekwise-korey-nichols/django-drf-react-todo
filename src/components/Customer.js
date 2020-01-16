@@ -12,26 +12,31 @@ export default class Customer extends Component{
                 customer_email: ""
             },
             customers: [],
-            url: "http://localhost:8000"
-            // url: "https://bank-backend-korey.herokuapp.com"
+            heroku_url: "https://bank-backend-korey.herokuapp.com",
+            local_url: "http://localhost:8000"
         }
     };
     
 componentDidMount() {
+    this.refreshCustomerList();
+}
+
+refreshCustomerList() {
     axios
-        .get(`${this.state.url}/customer/`)
+        .get(`${this.state.local_url}/customer/`)
         .then(res => this.setState({customers: res.data}))
         .catch(err => console.log(err));
 }
 
 createCustomer = () => {
-    const customer = {customer_name: "", customer_email: "", branch: `${this.state.url}/branch/${this.props.bankId}/`};
+    const customer = {customer_name: "", customer_email: "", branch: `${this.state.local_url}/branch/${this.props.bankId}/`};
     this.setState({ activeItem: customer, modal: !this.state.modal});
   };
 
   // set customer to only have name, email and branch
 editCustomer = target_customer => {
-    const customer = {id: target_customer.id, customer_name: target_customer.customer_name, customer_email: target_customer.customer_email, branch: `${this.state.url}/branch/${this.props.bankId}/`};
+    console.log(target_customer)
+    const customer = {id: target_customer.id, customer_name: target_customer.customer_name, customer_email: target_customer.customer_email, branch: `${this.state.local_url}/branch/${this.props.bankId}/`};
     this.setState({ activeItem: customer, modal: !this.state.modal });
 }
 
@@ -39,8 +44,9 @@ editCustomer = target_customer => {
 
 handleDelete(item) {
     axios
-          .delete(`${this.state.url}/customer/${item.id}`)
-          .then(res => this.componentDidMount())
+          .delete(`${this.state.local_url}/customer/${item.id}`)
+          .then(res => this.refreshCustomerList())
+          .catch(err => console.log(err));
   }
 
 renderCustomers() {
@@ -76,15 +82,15 @@ toggle = () => {
     console.log(item)
     if(item.id){
         axios
-            .put(`${this.state.url}/customer/${item.id}/`, item)
-            .catch(err => console.log(err))
-            .then(this.componentDidMount());
-            return;
+            .put(`${this.state.local_url}/customer/${item.id}/`, item)
+            .then(res => this.refreshCustomerList())
+            .catch(err => console.log(err));
+        return;
     }
       axios
-        .post(`${this.state.url}/customer/`, item)
-        .catch(err => console.log(err))
-        .then(res => this.componentDidMount());
+        .post(`${this.state.local_url}/customer/`, item)
+        .then(res => this.refreshCustomerList())
+        .catch(err => console.log(err));
        };
 
 render() {

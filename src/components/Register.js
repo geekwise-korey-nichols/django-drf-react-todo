@@ -24,7 +24,9 @@ export default class Register extends Component{
                 password: "",
                 groups: [1]
             },
-            Groups: []
+            Groups: [],
+            heroku_url: "https://bank-backend-korey.herokuapp.com",
+            local_url: "http://localhost:8000"
         }
     };
 
@@ -41,24 +43,23 @@ export default class Register extends Component{
 
     getGroups() {
       axios
-        .get("http://localhost:8000/users/api/auth/groups")
+        .get(`${this.state.local_url}/users/api/auth/groups`)
         .then(res => this.setState({Groups: res.data.Groups}))
         .catch(err => console.log(err))
     }
 
     renderGroupOptions() {
-      console.log(this.state.Groups)
       return this.state.Groups.map(group => (
         <option value={`${group.id}`}>{group.name}</option>
       ))
   }
 
     onSubmit() {
-        //console.log(parseInt(this.state.activeItem.groups))
+        console.log(parseInt(this.state.activeItem.groups))
         this.state.activeItem.groups = [parseInt(this.state.activeItem.groups)];
         console.log(this.state.activeItem.groups)
         axios
-            .post("http://localhost:8000/users/api/auth/register", this.state.activeItem)
+            .post(`${this.state.local_url}/users/api/auth/register`, this.state.activeItem)
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     }
