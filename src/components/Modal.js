@@ -38,7 +38,7 @@ export default class CustomModal extends Component {
                     value={this.state.activeItem.location_name}
                     onChange={this.handleChange}
                     placeholder="Enter branch name"
-                    maxLength="100"
+                    maxLength="256"
                   />
                 </FormGroup>
                 <FormGroup>
@@ -49,13 +49,13 @@ export default class CustomModal extends Component {
                     value={this.state.activeItem.location}
                     onChange={this.handleChange}
                     placeholder="Enter branch location"
-                    maxLength="100"
+                    maxLength="256"
                   />
                 </FormGroup>
               </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="success" onClick={() => onSave(this.state.activeItem)}>
+          <Button type="submit" color="success" onClick={() => onSave(this.state.activeItem)}>
             Save
           </Button>
         </ModalFooter>
