@@ -23,7 +23,7 @@ export default class DynamicNavbar extends Component{
 
     componentDidMount() {
         axios
-            .get("http://localhost:8000/")
+            .get("https://bank-backend-korey.herokuapp.com")
             .then(res => this.setState({models: Object.keys(res.data)}))
             .catch(err => console.log(err));
     }

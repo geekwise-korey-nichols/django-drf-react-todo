@@ -12,8 +12,8 @@ export default class AllCustomer extends Component{
                 customer_email: ""
             },
             customers: [],
-            heroku_url: "https://bank-backend-korey.herokuapp.com",
-            local_url: "http://localhost:8000"
+            url: "https://bank-backend-korey.herokuapp.com",
+            // url: "http://localhost:8000"
         }
     };
     
@@ -23,20 +23,20 @@ componentDidMount() {
 
 refreshCustomerList() {
     axios
-        .get(`${this.state.local_url}/customer/`)
+        .get(`${this.state.url}/customer/`)
         .then(res => this.setState({customers: res.data}))
         .catch(err => console.log(err));
 }
 
 createCustomer = () => {
-    const customer = {customer_name: "", customer_email: "", branch: `${this.state.local_url}/branch/${this.props.bankId}/`};
+    const customer = {customer_name: "", customer_email: "", branch: `${this.state.url}/branch/${this.props.bankId}/`};
     this.setState({ activeItem: customer, modal: !this.state.modal});
   };
 
   // set customer to only have name, email and branch
 editCustomer = target_customer => {
     console.log(target_customer)
-    const customer = {id: target_customer.id, customer_name: target_customer.customer_name, customer_email: target_customer.customer_email, branch: `${this.state.local_url}/branch/${this.props.bankId}/`};
+    const customer = {id: target_customer.id, customer_name: target_customer.customer_name, customer_email: target_customer.customer_email, branch: `${this.state.url}/branch/${this.props.bankId}/`};
     this.setState({ activeItem: customer, modal: !this.state.modal });
 }
 
@@ -44,7 +44,7 @@ editCustomer = target_customer => {
 
 handleDelete(item) {
     axios
-          .delete(`${this.state.local_url}/customer/${item.id}`)
+          .delete(`${this.state.url}/customer/${item.id}`)
           .then(res => this.refreshCustomerList())
           .catch(err => console.log(err));
   }

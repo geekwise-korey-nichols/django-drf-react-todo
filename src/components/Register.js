@@ -25,8 +25,8 @@ export default class Register extends Component{
                 groups: [1]
             },
             Groups: [],
-            heroku_url: "https://bank-backend-korey.herokuapp.com",
-            local_url: "http://localhost:8000"
+            url: "https://bank-backend-korey.herokuapp.com",
+            // url: "http://localhost:8000"
         }
     };
 
@@ -43,7 +43,7 @@ export default class Register extends Component{
 
     getGroups() {
       axios
-        .get(`${this.state.local_url}/users/api/auth/groups`)
+        .get(`${this.state.url}/users/api/auth/groups`)
         .then(res => this.setState({Groups: res.data.Groups}))
         .catch(err => console.log(err))
     }
@@ -59,7 +59,7 @@ export default class Register extends Component{
         this.state.activeItem.groups = [parseInt(this.state.activeItem.groups)];
         console.log(this.state.activeItem.groups)
         axios
-            .post(`${this.state.local_url}/users/api/auth/register`, this.state.activeItem)
+            .post(`${this.state.url}/users/api/auth/register`, this.state.activeItem)
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     }

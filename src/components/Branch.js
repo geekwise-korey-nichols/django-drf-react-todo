@@ -13,8 +13,8 @@ export default class Branch extends Component{
             location_name: ""
           },
           branches: [],
-          heroku_url: "https://bank-backend-korey.herokuapp.com",
-          local_url: "http://localhost:8000"
+          url: "https://bank-backend-korey.herokuapp.com",
+          // url: "http://localhost:8000"
         };
     }
     
@@ -24,7 +24,7 @@ export default class Branch extends Component{
 
     refreshBranchList() {
         axios
-              .get(`${this.state.local_url}/branch/`)
+              .get(`${this.state.url}/branch/`)
               .then(res => this.setState({branches: res.data }))
               .catch(err => console.log(err));
     }
@@ -41,7 +41,7 @@ export default class Branch extends Component{
     handleDelete(branch) {
       console.log(branch)
         axios
-              .delete(`${this.state.local_url}/branch/${branch.id}`)
+              .delete(`${this.state.url}/branch/${branch.id}`)
               .then(res => this.refreshBranchList())
               .catch(err => console.log(err));
     }
@@ -85,14 +85,14 @@ export default class Branch extends Component{
         if(branch.location !== "" && branch.location_name !== ""){
             if (branch.id) {
               axios
-                .put(`${this.state.local_url}/branch/${branch.id}/`, branch)
+                .put(`${this.state.url}/branch/${branch.id}/`, branch)
                 .then(res => this.refreshBranchList())
                 .catch(err => console.log(err));
               return;
             }
             
             axios
-              .post(`${this.state.local_url}/branch/`, branch)
+              .post(`${this.state.url}/branch/`, branch)
               .then(res => this.refreshBranchList())
               .catch(err => console.log(err));
             }
