@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from bank import views as bank_views
+from account import views as account_views
 
 router = routers.DefaultRouter()
 router.register(r'branch', bank_views.Branch_Viewset)
@@ -29,5 +30,4 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('users/', include('account.urls'))
-
 ]

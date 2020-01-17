@@ -1,14 +1,18 @@
 from rest_framework import serializers
 from .models import Branch, Customer, Account, Product
+from django.contrib.auth.models import User
+
+class User_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id']
 
 class Branch_Serializer( serializers.HyperlinkedModelSerializer ):
+    users = User_Serializer(many=True, read_only=True)
+
     class Meta:
         model = Branch
-        fields = [
-            'id',
-            'location_name',
-            'location'
-        ]
+        fields = [ 'location_name', 'location', 'id', 'users']
 
 class Customer_Serializer( serializers.HyperlinkedModelSerializer ):
     class Meta:
