@@ -3,7 +3,7 @@ import '../App.css';
 import axios from 'axios';
 import CreateCustomer from "./CreateCustomer";
 
-export default class Customer extends Component{
+export default class AllCustomer extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -54,7 +54,6 @@ renderCustomers() {
     customers = this.state.customers
     return customers.map(customer => (
         <div key={customer.id}>
-            {this.props.bankId === customer.branch_id &&
                 <li className="list-group-item d-flex justify-content-between align-items-center" key={customers.id}>
                     {customer.customer_name}
                     <button
@@ -73,26 +72,6 @@ renderCustomers() {
     ))
 }
 
-toggle = () => {
-    this.setState({ modal: !this.state.modal });
-  };
-
-  handleSubmit = item => {
-    this.toggle();
-    console.log(item)
-    if(item.id){
-        axios
-            .put(`${this.state.local_url}/customer/${item.id}/`, item)
-            .then(res => this.refreshCustomerList())
-            .catch(err => console.log(err));
-        return;
-    }
-      axios
-        .post(`${this.state.local_url}/customer/`, item)
-        .then(res => this.refreshCustomerList())
-        .catch(err => console.log(err));
-       };
-
 render() {
     return (
         <div>
@@ -101,17 +80,6 @@ render() {
                     <div className="col-md-6 col-sm-10 mx-auto p-0">
                         <div className="card p-3">
                         <ul className="list-group list-group-flush">{this.renderCustomers()}</ul>
-            <button onClick={this.createCustomer} className="">
-                      New Customer
-                    </button>
-            {this.state.modal ? (
-              <CreateCustomer
-                bankId={this.props.bankId}
-                activeItem={this.state.activeItem}
-                toggle={this.toggle}
-                onSave={this.handleSubmit}
-              />
-            ) : null}  
              </div>
             </div>
             </div>

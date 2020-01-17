@@ -55,9 +55,9 @@ export default class Branch extends Component{
         let newItems = this.state.branches
         return newItems.map(branch => (
           <div key={branch.id}>
-            <li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
               Name: {branch.location_name} - Location: {branch.location}
-            </li>
+            
             <button
                     onClick={() => this.editBranch(branch)}
                     className="btn btn-secondary mr-2"
@@ -71,6 +71,7 @@ export default class Branch extends Component{
           >
             Delete{" "}
           </button>
+          </li>
           <ul>
             <Customer bankId={branch.id}></Customer>
           </ul>
@@ -100,18 +101,26 @@ export default class Branch extends Component{
 render() {
     return (
         <div>
-            <ul>{this.renderBranches()}</ul>
-        <button onClick={this.createBranch} className="btn btn-primary">
-                      New Branch
-                    </button>
-        {this.state.modal ? (
+          <main className="content">
+                <div className="row ">
+                    <div className="col-md-6 col-sm-10 mx-auto p-0">
+                        <div className="card p-3">
+            <ul className="list-group list-group-flush">{this.renderBranches()}</ul>
+            <button onClick={this.createBranch} className="btn btn-primary">
+              New Branch
+            </button>
+            {this.state.modal ? (
               <Modal
                 activeItem={this.state.activeItem}
                 toggle={this.toggle}
                 onSave={this.handleSubmit}
               />
-            ) : null}  
+            ) : null}
+            </div>
+            </div>
+            </div>
+            </main>
         </div>  
     )  
-}
+  }
 }

@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Branch from "./components/Branch";
 import Customer from "./components/Customer";
+import AllCustomers from "./components/AllCustomers";
 import DynamicNavbar from "./components/DynamicNavbar";
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -23,6 +24,7 @@ class App extends Component{
             <Route path ="/Register" component={Register}/>
         </div>    
       </Router>
+      
 
     )
   }
