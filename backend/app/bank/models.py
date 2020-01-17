@@ -1,12 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 import uuid
 # Create your models here.
 
 # Branch model
 class Branch(models.Model):
-    location_name = models.CharField(max_length=30)
-    location = models.CharField(max_length=30)
+    location_name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
     location_id = str(uuid.uuid4())
+    users = models.ManyToManyField(User)
 
     def __str__(self):
         return f"{self.location_name} - {self.location}"
