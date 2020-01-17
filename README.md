@@ -5,5 +5,5 @@ Bank project using Django and React deployed via Heroku<br>
 [Backend](https://bank-backend-korey.herokuapp.com/)
 
 # Admin login
-Username: admin
+Username: admin<br>
 Password: admin
