@@ -13,8 +13,8 @@ export default class Branch extends Component{
             location_name: ""
           },
           branches: [],
-          url: "https://bank-backend-korey.herokuapp.com",
-          // url: "http://localhost:8000"
+          // url: "https://bank-backend-korey.herokuapp.com",
+          url: "http://localhost:8000"
         };
     }
     

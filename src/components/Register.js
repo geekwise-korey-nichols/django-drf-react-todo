@@ -25,8 +25,8 @@ export default class Register extends Component{
                 groups: [1]
             },
             Groups: [],
-            url: "https://bank-backend-korey.herokuapp.com",
-            // url: "http://localhost:8000"
+            // url: "https://bank-backend-korey.herokuapp.com",
+            url: "http://localhost:8000"
         }
     };
 

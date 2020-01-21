@@ -6,14 +6,19 @@ import Branch from "./components/Branch";
 import Customer from "./components/Customer";
 import AllCustomers from "./components/AllCustomers";
 import DynamicNavbar from "./components/DynamicNavbar";
+import Header from "./components/Header"
 import {BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from "react-redux";
+import store from './Store'
 
 class App extends Component{
   render() {
     return (
+      <Provider store = {store}>
       <Router>
         <div >
-            <DynamicNavbar/>
+          <Header/>
+            {/* <DynamicNavbar/> */}
             <Route exact path="/" component={Branch} />
             <Route path="/branch" component={Branch}/>
             <Route path ="/account"  component={Branch}/>
@@ -23,6 +28,7 @@ class App extends Component{
             <Route path ="/Register" component={Register}/>
         </div>    
       </Router>
+      </Provider>
       
 
     )

@@ -12,8 +12,8 @@ export default class Customer extends Component{
                 customer_email: ""
             },
             customers: [],
-            url: "https://bank-backend-korey.herokuapp.com",
-            // url: "http://localhost:8000"
+            // url: "https://bank-backend-korey.herokuapp.com",
+            url: "http://localhost:8000"
         }
     };
     
