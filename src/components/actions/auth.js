@@ -7,7 +7,7 @@ import { USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_FAIL,
 export const loadUser = () => (dispatch, getState) => {
  
 
-    axios.get('https://bank-django-drf-local.herokuapp.com/api/auth/user', tokenConfig(getState))
+    axios.get('http://localhost:8000/api/auth/user', tokenConfig(getState))
         .then(res => {
             dispatch ({
                 type: USER_LOADED,
@@ -33,7 +33,7 @@ export const login = (username, password) => dispatch => {
     const body = JSON.stringify({username,password})
 
 
-    axios.post('https://bank-django-drf-local.herokuapp.com/api/auth/login', body, config)
+    axios.post('http://localhost:8000/users/api/auth/login', body, config)
         .then(res => {
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -62,7 +62,7 @@ export const register = ({username, password, email,groups }) => dispatch => {
 
     const body = JSON.stringify({username,password, email,groups})
 
-    axios.post('https://bank-django-drf-local.herokuapp.com/api/auth/register', body, config)
+    axios.post('http://localhost:8000/users/api/auth/register', body, config)
 
         .then(res => {
             dispatch({
@@ -83,7 +83,7 @@ export const register = ({username, password, email,groups }) => dispatch => {
 export const logout = () => (dispatch, getState) => {
 
 
-    axios.post('https://bank-django-drf-local.herokuapp.com/api/auth/logout/',null, tokenConfig(getState))
+    axios.post('http://localhost:8000/users/api/auth/logout/',null, tokenConfig(getState))
         .then(res => {
             dispatch ({
                 type: LOGOUT_SUCCESS,
