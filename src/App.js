@@ -6,6 +6,7 @@ import Branch from "./components/Branch";
 import Customer from "./components/Customer";
 import AllCustomers from "./components/AllCustomers";
 import DynamicNavbar from "./components/DynamicNavbar";
+import PasswordReset from "./components/PasswordReset";
 import Header from "./components/Header"
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from "react-redux";
@@ -29,6 +30,7 @@ class App extends Component{
             <PrivateRoute path ="/product"  component={Branch}/>
             <Route exact path ="/login" component={Login}/>
             <Route path ="/Register" component={Register}/>
+            <Route path ="/reset-password" component={PasswordReset}/>
         </div>    
       </Router>
       </Provider>
