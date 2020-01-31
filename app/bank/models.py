@@ -8,7 +8,10 @@ class Branch(models.Model):
     location_name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     location_id = str(uuid.uuid4())
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField(
+        User,
+        related_name="users",
+    )
 
     def __str__(self):
         return f"{self.location_name} - {self.location}"

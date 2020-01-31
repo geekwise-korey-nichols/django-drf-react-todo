@@ -22,6 +22,7 @@ from account import views as account_views
 router = routers.DefaultRouter()
 router.register(r'branch', bank_views.Branch_Viewset)
 router.register(r'customer', bank_views.Customer_Viewset)
+router.register(r'account', bank_views.BranchView)
 # router.register(r'account', bank_views.Account_Viewset)
 # router.register(r'product', bank_views.Product_Viewset)
 
